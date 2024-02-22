@@ -28,7 +28,7 @@ const App = () => {
           </ChooseUs>
         </WhyChooseUs>
 
-        <ExploreProperties id="choose">
+        <ExploreProperties id="properties">
           <h3>Explore Our Featured Properties</h3>
           <Properties>
             {
