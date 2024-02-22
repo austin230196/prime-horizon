@@ -4,21 +4,21 @@ const App = () => {
       <Nav />
       <AppBody>
 
-        <Home>
+        <Home id="home">
           <h1>Using Real Estate to show appreciation to the world.</h1>
           <p>Embark on Your Real Estate Journey and Explore a Wealth of Tailored Opportunities Await You</p>
           <Button>Explore our properties</Button>
-          <img src="https://assets-global.website-files.com/65b35606fa3a4ac795d3b484/65c220572d81572885925e11_MacBook%20Pro%2014_%20-%207.jpg" alt="Image" />
+          <img loading="lazy" src="https://assets-global.website-files.com/65b35606fa3a4ac795d3b484/65c220572d81572885925e11_MacBook%20Pro%2014_%20-%207.jpg" alt="Image" />
         </Home>
 
-        <WhyChooseUs>
+        <WhyChooseUs id="choose">
           <h3>Why Choose Us</h3>
           <ChooseUs>
             {
               whyChooseUs.map(({icon, title, content}, i) => (
                 <ChooseUsCard key={i}>
                   <span>
-                    <img src={icon} alt="Icon" />
+                    <img loading="lazy" src={icon} alt="Icon" />
                   </span>
                   <h5>{title}</h5>
                   <p>{content}</p>
@@ -28,13 +28,13 @@ const App = () => {
           </ChooseUs>
         </WhyChooseUs>
 
-        <ExploreProperties>
+        <ExploreProperties id="choose">
           <h3>Explore Our Featured Properties</h3>
           <Properties>
             {
               properties.map(({image, name, location, bedrooms, bathrooms, area, price}, i) => (
                 <Property key={i}>
-                  <img src={image} alt="Image" />
+                  <img loading="lazy" src={image} alt="Image" />
                   <section>
                     <h4>{name}</h4>
                     <p><CiLocationOn />{location}</p>
@@ -60,12 +60,12 @@ const App = () => {
           </Properties>
         </ExploreProperties>
 
-        <RealEstateServices>
+        <RealEstateServices id="services">
           <h3>Comprehensive real estate services</h3>
           {
             services.map(({color, title, content, image, link}, i) => (
               <Service key={i}>
-                <img style={{order: (i + 1) % 2 === 0 ? 1 : -1 }} src={image} alt="Image" />
+                <img loading="lazy" style={{order: (i + 1) % 2 === 0 ? 1 : -1 }} src={image} alt="Image" />
                 <main>
                   <h5 style={{color}}>{title}</h5>
                   <p>{content}</p>
@@ -76,13 +76,13 @@ const App = () => {
           }
         </RealEstateServices>
 
-        <OurClientSays>
+        <OurClientSays id="testimonials">
           <h3>What our client says</h3>
           <Testimonials>
             {
               testimonials.map(({image, content, client}, i) => (
                 <Testimonial key={i}>
-                  <img src={image} alt="Image" />
+                  <img loading="lazy" src={image} alt="Image" />
                   <p>{content}</p>
                   <b>-{client}</b>
                 </Testimonial>
@@ -92,13 +92,13 @@ const App = () => {
           <button>Read more testimonial</button>
         </OurClientSays>
 
-        <Blog>
+        <Blog id="blog">
           <h3>Stay informed on out latest articles</h3>
           <Articles>
             {
               articles.map(({title, image, content}, i) => (
                 <Article key={i}>
-                  <img src={image} alt="Image" />
+                  <img loading="lazy" src={image} alt="Image" />
                   <h4>{title}</h4>
                   <p>{content}</p>
                   <a href="#">Read more <SlArrowRight /></a>
@@ -108,7 +108,7 @@ const App = () => {
           </Articles>
         </Blog>
 
-        <Contact>
+        <Contact id="contact">
           <div>
             <h3>Get In Touch</h3>
             <p>Leave your email address to contact us, No spam messages</p>
@@ -141,7 +141,7 @@ const App = () => {
           </FooterRight>
         </Footer>
       </FooterContainer>
-      
+
     </AppWrapper>
   )
 }
@@ -198,11 +198,19 @@ const Footer = styled.div`
   align-items: flex-start;
   gap: 50px;
   margin-top: 50px;
+
+  @media screen and (max-width: 795px){
+    flex-direction: column;
+  }
 `;
 
 const FooterLeft = styled.div`
   color: ${props => props.theme.secondary.main}; 
   width: min(40%, 550px);
+
+  @media screen and (max-width: 795px){
+    width: 100%;
+  }
 
   > h4 {
     margin-top: 20px;
@@ -218,10 +226,19 @@ const FooterLeft = styled.div`
 `;
 
 const FooterRight = styled.div`
-  display: flex;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   flex:1;
+
+  @media screen and (max-width: 795px){
+    width: 100%;
+  }
+
+
+  @media screen and (max-width: 575px){
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const FooterResource = styled.div`
@@ -274,6 +291,7 @@ const Contact = styled(Blog)`
     > h3 {
       font-size: 1.7rem;
       font-weight: 800;
+      margin-bottom: 10px;
     }
 
     > p {
@@ -281,6 +299,10 @@ const Contact = styled(Blog)`
       font-size: 1.2rem;
       color: ${props => props.theme.grey.main};
       margin-bottom: 25px;
+      
+      @media screen and (max-width: 575px){
+        font-size: 1rem;
+      }
     }
 
     > input {
@@ -307,6 +329,10 @@ const Contact = styled(Blog)`
       margin-bottom: 40px;
       cursor: pointer;
       font-size: 1.1rem;
+
+      @media screen and (max-width: 575px){
+        width: 100%;
+      }
     }
   }
 `;
@@ -318,6 +344,14 @@ const Articles = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
   margin-block: 20px;
+
+  @media screen and (max-width: 965px){
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 575px){
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Article = styled.div`
@@ -441,6 +475,14 @@ const Service = styled.div`
   gap: 40px;
   margin-block: 25px;
 
+  @media screen and (max-width: 795px){
+    grid-template-columns: 1fr;
+
+    > img {
+      order: -1 !important;
+    }
+  }
+
   > img {
     width: 100%;
   }
@@ -512,6 +554,15 @@ const Properties = styled.div`
   place-items: center;
   gap: 30px;
   width: 100%;
+
+  @media screen and (max-width: 965px){
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+
+  @media screen and (max-width: 575px){
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Testimonials = styled.div`
@@ -521,6 +572,19 @@ const Testimonials = styled.div`
   place-items: center;
   gap: 30px;
   align-items: stretch;
+
+  @media screen and (max-width: 1135px){
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (max-width: 965px){
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+
+  @media screen and (max-width: 575px){
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Testimonial = styled.div`
@@ -552,6 +616,7 @@ const Testimonial = styled.div`
   >b {
     font-weight: 800;
   }
+
 `;
 
 const ChooseUs = styled.div`
@@ -559,6 +624,11 @@ const ChooseUs = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin-bottom: 30px;
+
+
+  @media screen and (max-width: 575px){
+    grid-template-columns: 1fr;
+  }
 `;
 
 const ChooseUsCard = styled.div`
@@ -622,6 +692,14 @@ const Home = styled.div`
     font-weight: 800;
     // width: 90%;
     text-align: center;
+    
+    @media screen and (max-width: 795px){
+      font-size: 3.5rem;
+    }
+    
+    @media screen and (max-width: 575px){
+      font-size: 2.5rem;
+    }
   }
 
   > p {
